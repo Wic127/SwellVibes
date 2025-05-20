@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Swell Vibes Seltzer</title>
+  <style>
+    body {
+      background: #017f7b;
+      color: #fff;
+      font-family: 'Arial Rounded MT Bold', sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 60px;
+      color: #ff6600;
+      margin-bottom: 0;
+    }
+
+    p {
+      font-size: 20px;
+      margin-top: 0;
+    }
+
+    form {
+      margin-top: 30px;
+    }
+
+    input[type="email"] {
+      padding: 12px;
+      font-size: 18px;
+      width: 280px;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      background: #ff6600;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #success-message {
+      margin-top: 20px;
+      color: #ffe97f;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <img src="swell-vibes-can.png" alt="Swell Vibes Seltzer" style="width: 200px; margin-bottom: 20px;">
+  <h1>Swell Vibes</h1>
+  <p>Coming soon — THC-infused seltzer for sunny days and good vibes. 🌊</p>
+  <p>Leave your email for updates, one-time discounts, and free prizes!</p>
+
+  <form id="email-form">
+    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+    <br>
+    <button type="submit">NOTIFY ME</button>
+    <div id="success-message"></div>
+  </form>
+
+  <script>
+    document.getElementById("email-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+
+      fetch("YOUR_GOOGLE_SCRIPT_WEB_APP_URL", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `email=${encodeURIComponent(email)}`
+      })
+      .then(() => {
+        document.getElementById("success-message").textContent = "Thanks! You're on the list 🌴";
+        document.getElementById("email").value = "";
+      })
+      .catch(() => {
+        document.getElementById("success-message").textContent = "Something went wrong. Try again!";
+      });
+    });
+  </script>
+</body>
+</html>
