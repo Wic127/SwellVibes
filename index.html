@@ -10,8 +10,12 @@
             padding: 0;
             height: 100%;
             font-family: 'Arial Rounded MT Bold', sans-serif;
-            background-color: #000;
             color: #fff;
+            /* TEST: Apply background directly to body */
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80') no-repeat center center fixed;
+            -webkit-background-size: cover; /* Specific prefix for older Safari */
+            background-size: cover;
+            background-color: #000; /* Fallback and base color */
         }
 
         body {
@@ -24,35 +28,14 @@
             padding: 20px;
         }
 
-        /* Background fixed overlay - Initial state without image */
-        .background-image {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%;
-            height: 100%;
-            /*
-            // --- Original CSS approach (uncomment to revert) ---
-            // background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1500&q=80');
-            // background-size: cover;
-            // background-position: center center;
-            */
-            opacity: 0.2; /* Apply opacity regardless of how image is set */
-            z-index: -1;
-            /* Ensure the background covers the whole area even before image is loaded */
-            background-color: #000; /* Fallback background color if image fails or before it loads */
-        }
-
-        /* Styles applied by JavaScript once image loads */
-        .background-image.loaded {
-            background-size: cover;
-            background-position: center center;
-        }
+        /* No .background-image div needed for this test */
+        /* Remove or comment out the .background-image CSS block */
 
         /* Content container */
         .left-content {
             max-width: 500px;
             width: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.7); /* Keep the content background */
             padding: 30px;
             border-radius: 10px;
             text-align: center;
@@ -60,75 +43,10 @@
             z-index: 10;
             box-sizing: border-box;
         }
-
-        h1 {
-            font-size: 48px;
-            color: #ff6600;
-            margin-bottom: 10px;
-        }
-
-        p {
-            font-size: 18px;
-            margin-top: 0;
-        }
-
-        form {
-            margin-top: 20px;
-        }
-
-        input,
-        button {
-            display: block;
-            width: 100%;
-            margin: 12px 0;
-            padding: 14px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        input {
-            font-family: inherit;
-        }
-
-        button {
-            background-color: #ff6600;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover,
-        button:focus {
-            background-color: #e55a00;
-            outline: none;
-        }
-
-        #success-message {
-            margin-top: 15px;
-            font-size: 16px;
-            color: #ffe97f;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 32px;
-            }
-
-            p {
-                font-size: 16px;
-            }
-
-            input, button {
-                font-size: 14px;
-                padding: 12px;
-            }
-        }
+        /* ... rest of your CSS ... */
     </style>
 </head>
 <body>
-    <div class="background-image"></div>
     <div class="left-content">
         <h1>SWELL VIBES</h1>
         <p>Get first access when we launch!</p>
@@ -140,36 +58,14 @@
     </div>
 
     <script>
-        // Form submission handling
+        // Form submission handling (keep this)
         document.getElementById('email-form').addEventListener('submit', function (e) {
             e.preventDefault();
             document.getElementById('success-message').textContent = "You're on the list!";
             this.reset();
         });
 
-        // Background image pre-loading for better iOS compatibility
-        document.addEventListener('DOMContentLoaded', function() {
-            const bgDiv = document.querySelector('.background-image');
-            if (bgDiv) {
-                // Use a slightly smaller version of the image for better mobile performance
-                // You can experiment with different 'w' values (width)
-                const imageUrl = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80'; // Reduced width to 1000px
-
-                const img = new Image();
-                img.onload = function() {
-                    // Apply background-image and add 'loaded' class for cover/position styles
-                    bgDiv.style.backgroundImage = `url('${imageUrl}')`;
-                    bgDiv.classList.add('loaded'); // Add class to apply background-size and position
-                };
-                img.onerror = function() {
-                    console.error("Failed to load background image:", imageUrl);
-                    // Optionally, remove the opacity if the image fails to load,
-                    // so the solid black background is fully visible.
-                    bgDiv.style.opacity = '1';
-                };
-                img.src = imageUrl;
-            }
-        });
+        // Remove the background image JavaScript for this test
     </script>
 </body>
 </html>
