@@ -1,45 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Background Test</title>
-<style>
-  html, body {
-    margin: 0; padding: 0; height: 100%;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Swell Vibes THC Seltzer</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Arial Rounded MT Bold', sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
 
-  body {
-    position: relative;
-    background-color: #000;
-    color: #fff;
-    font-family: Arial, sans-serif;
-  }
+    body {
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
 
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1500&q=80');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 0.2;
-    z-index: -1;
-  }
+    /* Background fixed overlay */
+    .background-image {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1500&q=80');
+      background-size: cover;
+      background-position: center center;
+      opacity: 0.2;
+      z-index: -1;
+    }
 
-  .content {
-    position: relative;
-    padding: 2rem;
-    text-align: center;
-  }
+    /* Content container */
+    .left-content {
+      max-width: 500px;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      box-sizing: border-box;
+    }
 
-</style>
+    h1 {
+      font-size: 48px;
+      color: #ff6600;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 18px;
+      margin-top: 0;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    input,
+    button {
+      display: block;
+      width: 100%;
+      margin: 12px 0;
+      padding: 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    input {
+      font-family: inherit;
+    }
+
+    button {
+      background-color: #ff6600;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover,
+    button:focus {
+      background-color: #e55a00;
+      outline: none;
+    }
+
+    #success-message {
+      margin-top: 15px;
+      font-size: 16px;
+      color: #ffe97f;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 32px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+
+      input, button {
+        font-size: 14px;
+        padding: 12px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="content">
+  <div class="background-image"></div>
+  <div class="left-content">
     <h1>SWELL VIBES</h1>
     <p>Get first access when we launch!</p>
+    <form id="email-form">
+      <input type="email" id="email" placeholder="Enter your email" required />
+      <button type="submit">Notify Me</button>
+      <div id="success-message"></div>
+    </form>
   </div>
+
+  <script>
+    document.getElementById('email-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      document.getElementById('success-message').textContent = "You're on the list!";
+      this.reset();
+    });
+  </script>
 </body>
 </html>
