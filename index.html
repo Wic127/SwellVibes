@@ -11,25 +11,38 @@
             height: 100%;
             font-family: 'Arial Rounded MT Bold', sans-serif;
             color: #fff;
-            /* TEST: Apply background directly to body */
-            background: url('IMG_2367.png') no-repeat center center fixed;
-            -webkit-background-size: cover; /* Specific prefix for older Safari */
-            background-size: cover;
-            background-color: #000; /* Fallback and base color */
+            /* Added overflow: hidden to prevent scrollbars from background differences */
+            overflow: hidden;
         }
 
         body {
+            /* Changed background-size from cover to contain */
+            background: url('IMG_2367.png') no-repeat center center fixed;
+            -webkit-background-size: contain; /* Use contain */
+            background-size: contain; /* Use contain */
+            background-color: #000; /* This color will show in the empty space if aspect ratios don't match */
+            
             position: relative;
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow-x: hidden; /* This might be redundant with html/body overflow: hidden, but good to keep */
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            box-sizing: border-box; /* Ensures padding is included in width/height */
         }
 
-        /* No .background-image div needed for this test */
-        /* Remove or comment out the .background-image CSS block */
+        /* Overlay for the background image to add darkness/opacity */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+            z-index: 1; /* Below content, above background image */
+        }
 
         /* Content container */
         .left-content {
@@ -40,10 +53,74 @@
             border-radius: 10px;
             text-align: center;
             position: relative;
-            z-index: 10;
+            z-index: 2; /* Ensure content is above the overlay */
             box-sizing: border-box;
         }
-        /* ... rest of your CSS ... */
+
+        h1 {
+            font-size: 48px;
+            color: #ff6600;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-top: 0;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input,
+        button {
+            display: block;
+            width: 100%;
+            margin: 12px 0;
+            padding: 14px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input {
+            font-family: inherit;
+        }
+
+        button {
+            background-color: #ff6600;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover,
+        button:focus {
+            background-color: #e55a00;
+            outline: none;
+        }
+
+        #success-message {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #ffe97f;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+
+            input, button {
+                font-size: 14px;
+                padding: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -58,14 +135,12 @@
     </div>
 
     <script>
-        // Form submission handling (keep this)
+        // Form submission handling
         document.getElementById('email-form').addEventListener('submit', function (e) {
             e.preventDefault();
             document.getElementById('success-message').textContent = "You're on the list!";
             this.reset();
         });
-
-        // Remove the background image JavaScript for this test
     </script>
 </body>
 </html>
