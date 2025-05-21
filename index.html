@@ -1,92 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Swell Vibes Seltzer</title>
-  <style>
-    body {
-      background: #017f7b;
-      color: #fff;
-      font-family: 'Arial Rounded MT Bold', sans-serif;
-      text-align: center;
-      padding: 40px;
-    }
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial Rounded MT Bold', sans-serif;
+  color: #fff;
+  min-height: 100vh;
+  background: url('IMG_2366.png') no-repeat right center;
+  background-size: auto 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
 
-    h1 {
-      font-size: 60px;
-      color: #ff6600;
-      margin-bottom: 0;
-    }
+/* Overlay container for content */
+.left-content {
+  width: 66.666%; /* Two-thirds */
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.4); /* Optional: semi-transparent bg for readability */
+  box-sizing: border-box;
+  z-index: 1;
+  position: relative;
+}
 
-    p {
-      font-size: 20px;
-      margin-top: 0;
-    }
+h1 {
+  font-size: 60px;
+  color: #ff6600;
+  margin-bottom: 0;
+}
 
-    form {
-      margin-top: 30px;
-    }
+p {
+  font-size: 20px;
+  margin-top: 0;
+}
 
-    input[type="email"] {
-      padding: 12px;
-      font-size: 18px;
-      width: 280px;
-      border: none;
-      border-radius: 5px;
-      margin-bottom: 15px;
-    }
+form {
+  margin-top: 30px;
+}
 
-    button {
-      background: #ff6600;
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      font-size: 18px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+input,
+button {
+  display: block;
+  width: calc(100% - 24px);
+  max-width: 400px;
+  margin: 15px auto;
+  padding: 12px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
 
-    #success-message {
-      margin-top: 20px;
-      color: #ffe97f;
-      font-size: 18px;
-    }
-  </style>
-</head>
-<body>
-  <img src="IMG_2366.png" alt="Swell Vibes Seltzer" style="width: 400px; margin-bottom: 20px;">
-  <h1>Swell Vibes</h1>
-  <p>Coming soon — THC-infused seltzer for sunny days and good vibes. 🌊</p>
-  <p>Leave your email for updates, one-time discounts, and free prizes!</p>
+button {
+  background: #ff6600;
+  color: white;
+  cursor: pointer;
+}
 
-  <form id="email-form">
-    <input type="email" id="email" name="email" placeholder="Enter your email" required>
-    <br>
-    <button type="submit">NOTIFY ME</button>
-    <div id="success-message"></div>
-  </form>
+#success-message {
+  margin-top: 20px;
+  color: #ffe97f;
+  font-size: 18px;
+}
 
-  <script>
-    document.getElementById("email-form").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const email = document.getElementById("email").value;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  body {
+    background-size: cover;
+    background-position: center center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
-      fetch("YOUR_GOOGLE_SCRIPT_WEB_APP_URL", {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: `email=${encodeURIComponent(email)}`
-      })
-      .then(() => {
-        document.getElementById("success-message").textContent = "Thanks! You're on the list 🌴";
-        document.getElementById("email").value = "";
-      })
-      .catch(() => {
-        document.getElementById("success-message").textContent = "Something went wrong. Try again!";
-      });
-    });
-  </script>
-</body>
-</html>
+  .left-content {
+    width: 90%;
+    background: rgba(0, 0, 0, 0.5);
