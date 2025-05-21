@@ -18,12 +18,13 @@
         /* Direct background image on the body for best compatibility */
         body {
             background-image: url('IMG_2367.png'); /* Your image */
-            /* CHANGED: back to cover */
-            background-size: cover; /* Ensures image covers the entire background, will crop if aspect ratios differ */
-            background-position: center center; /* Centers the image */
             background-repeat: no-repeat; /* Prevents tiling */
-            background-color: #000; /* Fallback color if image fails to load or for background of content box if content doesn't cover whole screen */
+            background-color: #000; /* This color will show in the empty space if aspect ratios don't match, or outside the cropped area */
             background-attachment: fixed; /* Keep background fixed during any scrolling */
+
+            /* Default (Landscape or non-portrait) settings: Show entire image, centered */
+            background-size: contain;
+            background-position: center center;
 
             /* Flexbox for centering the content */
             display: flex;
@@ -34,7 +35,7 @@
             box-sizing: border-box; /* Include padding in the element's total width and height */
         }
 
-        /* Content container - Background is already transparent from previous step */
+        /* Content container - Background is transparent */
         .left-content {
             max-width: 500px;
             width: 100%;
@@ -99,6 +100,7 @@
             color: #ffe97f;
         }
 
+        /* Media Queries for Mobile Optimization */
         @media (max-width: 768px) {
             h1 {
                 font-size: 32px;
@@ -111,6 +113,16 @@
             input, button {
                 font-size: 14px;
                 padding: 12px;
+            }
+        }
+
+        /* === NEW: Portrait Mode Specific Styles === */
+        @media (orientation: portrait) {
+            body {
+                /* Scale the image to 100% of the height, and let width be auto to maintain aspect ratio */
+                background-size: auto 100%;
+                /* Position the image to the right edge */
+                background-position: right center;
             }
         }
     </style>
