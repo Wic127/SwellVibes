@@ -5,67 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Swell Vibes THC Seltzer</title>
     <style>
+        /* Base styles for HTML and Body */
         html, body {
             margin: 0;
             padding: 0;
-            height: 100%;
+            height: 100%; /* Important for background to cover full height */
             font-family: 'Arial Rounded MT Bold', sans-serif;
-            color: #fff;
-            /* Added overflow: hidden to prevent scrollbars from background differences */
-            overflow: hidden;
+            color: #fff; /* Default text color */
+            overflow: hidden; /* Prevent scrolling if content is larger than viewport */
         }
 
+        /* Direct background image on the body for best compatibility */
         body {
-            /* Changed background-size from cover to contain */
-            background: url('IMG_2367.png') no-repeat center center fixed;
-            -webkit-background-size: contain; /* Use contain */
-            background-size: contain; /* Use contain */
+            background-image: url('IMG_2367.png'); /* Your image */
+            background-size: contain; /* Ensures image fits entirely without cropping */
+            background-position: center center; /* Centers the image */
+            background-repeat: no-repeat; /* Prevents tiling */
             background-color: #000; /* This color will show in the empty space if aspect ratios don't match */
-            
-            position: relative;
-            min-height: 100vh;
-            overflow-x: hidden; /* This might be redundant with html/body overflow: hidden, but good to keep */
+            background-attachment: fixed; /* Keep background fixed during any scrolling */
+
+            /* Flexbox for centering the content */
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            box-sizing: border-box; /* Ensures padding is included in width/height */
+            min-height: 100vh; /* Ensure body takes full viewport height */
+            padding: 20px; /* Add some padding around the content */
+            box-sizing: border-box; /* Include padding in the element's total width and height */
         }
 
-        /* Overlay for the background image to add darkness/opacity */
-        body::before {
+        /* --- REMOVED: The body::before pseudo-element that created the dark overlay --- */
+        /* body::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
-            z-index: 1; /* Below content, above background image */
-        }
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        } */
 
         /* Content container */
         .left-content {
             max-width: 500px;
             width: 100%;
-            background: rgba(0, 0, 0, 0.7); /* Keep the content background */
+            /* --- REMOVED: background: rgba(0, 0, 0, 0.7); (the black square) --- */
+            background: transparent; /* Make the background of the content box transparent */
             padding: 30px;
             border-radius: 10px;
             text-align: center;
-            position: relative;
-            z-index: 2; /* Ensure content is above the overlay */
-            box-sizing: border-box;
+            position: relative; /* Keep for z-index purposes if needed, though now less critical */
+            z-index: 2; /* Ensure content is above any other potential layers */
+            box-sizing: border-box; /* Include padding in the element's total width and height */
+            margin: 0 auto; /* Center content horizontally if not using flexbox */
         }
 
         h1 {
             font-size: 48px;
-            color: #ff6600;
+            color: #ff6600; /* Swell orange */
             margin-bottom: 10px;
         }
 
         p {
             font-size: 18px;
             margin-top: 0;
+            /* Added text-shadow for better readability against varied background */
+            text-shadow: 0px 0px 8px rgba(0,0,0,0.8);
         }
 
         form {
@@ -81,7 +86,7 @@
             font-size: 16px;
             border: none;
             border-radius: 5px;
-            box-sizing: border-box;
+            box-sizing: border-box; /* Include padding in the element's total width and height */
         }
 
         input {
@@ -89,7 +94,7 @@
         }
 
         button {
-            background-color: #ff6600;
+            background-color: #ff6600; /* Swell orange button */
             color: white;
             cursor: pointer;
             transition: background-color 0.3s ease;
@@ -97,16 +102,17 @@
 
         button:hover,
         button:focus {
-            background-color: #e55a00;
+            background-color: #e55a00; /* Darker orange on hover/focus */
             outline: none;
         }
 
         #success-message {
             margin-top: 15px;
             font-size: 16px;
-            color: #ffe97f;
+            color: #ffe97f; /* Light yellow for success message */
         }
 
+        /* Media Queries for Mobile Optimization */
         @media (max-width: 768px) {
             h1 {
                 font-size: 32px;
@@ -119,6 +125,10 @@
             input, button {
                 font-size: 14px;
                 padding: 12px;
+            }
+
+            .content-container {
+                padding: 20px; /* Reduce padding on smaller screens */
             }
         }
     </style>
@@ -135,11 +145,11 @@
     </div>
 
     <script>
-        // Form submission handling
+        // Basic form submission handling (no server-side interaction here)
         document.getElementById('email-form').addEventListener('submit', function (e) {
-            e.preventDefault();
+            e.preventDefault(); // Prevent default form submission
             document.getElementById('success-message').textContent = "You're on the list!";
-            this.reset();
+            this.reset(); // Clear the form fields
         });
     </script>
 </body>
